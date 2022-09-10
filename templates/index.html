@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONLINE IDE</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="header"> IPN ONLINE IDE </div>
+    <form action="{% url 'home' %}" method="post">
+        {% csrf_token %}
+        <div class="control-panel">
+            Selecciona el lenguaje:
+            &nbsp; &nbsp;
+            <select id="languages" class="languages" onchange="changeLanguage()" name="languages">
+                <option value="c">C</option>
+                <option value="cpp">C++</option>
+                <option value="java">Java</option>
+                <option value="python">Python</option>
+            </select>
+        </div>
+
+        <div class="editor" id="editor" name="editor"></div>
+
+        <div class="button-container">
+            <button class="btn" onclick="executeCode()">Compilar</button>
+        </div>
+    </form>
+
+    <div class="output"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/lib/ace.js' %}"></script>
+    <script src="{% static 'js/lib/theme-monokai.js' %}"></script>
+    <script src="{% static 'js/ide.js' %}"></script>
+</body>
+</html>
