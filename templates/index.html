@@ -21,7 +21,13 @@
                 {% comment %} <div class="editor" id="editor" name="editor"></div> {% endcomment %}
         
                 <div class="code">
-                    <textarea name="code" id="code" cols="200" rows="30"></textarea>
+                    
+                    {% if text %}
+                        <textarea name="code" id="code" cols="200" rows="25" spellcheck="false">{{text}}</textarea>
+                    {% else %}
+                        <textarea name="code" id="code" cols="200" rows="25" spellcheck="false"></textarea>
+                    {% endif %}
+                    
                 </div>
         
                 <div class="control-panel">
@@ -41,13 +47,13 @@
         
                 <div class="inout">
                     <label for="input">Input:</label>
-                    <textarea name="input" id="input" cols="70" rows="10"></textarea>
+                    <textarea name="input" id="input" cols="70" rows="10" spellcheck="false"></textarea>
                     <div class="sep"></div>
                     <label for="out">Output:</label>
                     {% if ans %}
-                        <textarea name="out" id="out" cols="70" rows="10" readonly>{{ans}}</textarea>
+                        <textarea name="out" id="out" cols="70" rows="10" readonly spellcheck="false">{{ans}}</textarea>
                     {% else %}
-                        <textarea name="out" id="out" cols="70" rows="10" readonly></textarea>
+                        <textarea name="out" id="out" cols="70" rows="10" readonly spellcheck="false"></textarea>
                     {% endif %}
                 </di>
             </form>

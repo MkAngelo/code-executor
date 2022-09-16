@@ -37,7 +37,7 @@ def home(request):
         else:
             ans = ans.stdout
         
-        context = {'ans': ans}  
+        context = {'ans': ans, 'text':source}  
         remove(route)
         return render(request, "index.html", context)
     return render(request, "index.html")
