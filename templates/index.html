@@ -9,28 +9,58 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <div class="header"> IPN ONLINE IDE </div>
-    <form action="{% url 'home' %}" method="post">
-        {% csrf_token %}
-        <div class="control-panel">
-            Selecciona el lenguaje:
-            &nbsp; &nbsp;
-            <select id="languages" class="languages" onchange="changeLanguage()" name="languages">
-                <option value="c">C</option>
-                <option value="cpp">C++</option>
-                <option value="java">Java</option>
-                <option value="python">Python</option>
-            </select>
+    <header>
+        <div class="header"> IPN ONLINE IDE </div></div>
+    </header>
+    
+    <main>
+        <div class="main">
+            <form action="{% url 'home' %}" method="post">
+                {% csrf_token %}
+                <br>
+                {% comment %} <div class="editor" id="editor" name="editor"></div> {% endcomment %}
+        
+                <div class="code">
+                    <textarea name="code" id="code" cols="200" rows="30"></textarea>
+                </div>
+        
+                <div class="control-panel">
+                    Lenguaje:
+                    &nbsp; 
+                    <select id="languages" class="languages" onchange="changeLanguage()" name="languages">
+                        <option value="c">C</option>
+                        <option value="cpp">C++</option>
+                        <option value="java">Java</option>
+                        <option value="py">Python</option>
+                    </select>
+                    &nbsp; &nbsp; 
+                    <div class="button-container">
+                        <button class="btn" onclick="executeCode()">Compilar</button>
+                    </div>
+                </div>
+        
+                <div class="inout">
+                    <label for="input">Input:</label>
+                    <textarea name="input" id="input" cols="70" rows="10"></textarea>
+                    <div class="sep"></div>
+                    <label for="out">Output:</label>
+                    {% if ans %}
+                        <textarea name="out" id="out" cols="70" rows="10" readonly>{{ans}}</textarea>
+                    {% else %}
+                        <textarea name="out" id="out" cols="70" rows="10" readonly></textarea>
+                    {% endif %}
+                </di>
+            </form>
         </div>
-
-        <div class="editor" id="editor" name="editor"></div>
-
-        <div class="button-container">
-            <button class="btn" onclick="executeCode()">Compilar</button>
+    </main>
+    
+    <footer>
+        <div class="footer">
+            <hr><br>
+            <p>IPN ONLINE IDE (c) Copyright 2022-2023 Miguel Sanchez</p>
+            <p>The only online IDE for IPN students platform.</p>
         </div>
-    </form>
-
-    <div class="output"></div>
+    </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{% static 'js/lib/ace.js' %}"></script>
