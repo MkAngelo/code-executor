@@ -8,20 +8,31 @@ def home(request):
         #import pdb; pdb.set_trace()
         lang = request.POST['languages']
         source = request.POST['code']
+
+        # Create a route
         name = "code." + lang
         route = "static/temp/"+name
+
+        # Create a new file
         temp = open(route, "w")
         temp.write(source)
         temp.close()
 
-        ans=''
-        if(lang == 'py'): ans=subprocess.run(["python3", route], capture_output=True, text=True)
-        # elif(lang == 'c'): subprocess.run(["gcc",route])
-        # elif(lang == 'cpp'): subprocess.run([])
-        # elif(lang == 'java'): subprocess.run([])
+        ans='' # Save the process
+
+        # Execute
+        if(lang == 'py'): 
+            ans=subprocess.run(["python3", route], capture_output=True, text=True)
+        elif(lang == 'java'): 
+            ans=subprocess.run(["java", route], capture_output=True, text=True)
+        elif(lang == 'c'): 
+            compiler=subprocess.run(["gcc", route], capture_output=True, text=True)
+            ans = subprocess.run(["./a.out"], capture_output=True, text=True)
+        elif(lang == 'cpp'): 
+            compiler=subprocess.run(["g++", route], capture_output=True, text=True)
+            ans = subprocess.run(["./a.out"], capture_output=True, text=True)
         
         if ans.stderr:
-            # print("Stderr:", ans.stderr)
             ans = "Upps... something was wrong"
         else:
             ans = ans.stdout
