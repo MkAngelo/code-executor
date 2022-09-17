@@ -45,9 +45,9 @@
                 </div>
         
                 <div class="inout">
-                    <label for="input">Input:</label>
+                    {% comment %} <label for="input">Input:</label>
                     <textarea name="input" id="input" cols="70" rows="10" spellcheck="false"></textarea>
-                    <div class="sep"></div>
+                    <div class="sep"></div> {% endcomment %}
                     <label for="out">Output:</label>
                     {% if ans %}
                         <textarea name="out" id="out" cols="70" rows="10" readonly spellcheck="false">{{ans}}</textarea>

@@ -1,4 +1,5 @@
 
+from distutils.cmd import Command
 from django.shortcuts import render
 import subprocess
 from os import remove
@@ -39,5 +40,6 @@ def home(request):
         
         context = {'ans': ans, 'text':source}  
         remove(route)
+        
         return render(request, "index.html", context)
     return render(request, "index.html")
