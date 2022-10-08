@@ -1,9 +1,11 @@
 
-from distutils.cmd import Command
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
-import subprocess
+import subprocess   
 from os import remove
 
+@method_decorator(csrf_exempt, name='dispatch')
 def home(request):
     if request.method == "POST":
         #import pdb; pdb.set_trace()
